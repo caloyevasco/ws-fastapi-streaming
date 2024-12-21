@@ -18,6 +18,6 @@ async def create_room(websocket : WebSocket, user_id : int):
         data = await websocket.receive()
         if data.get('text'):
             data = json.loads(data['text'])['binary']
-            with wave.open(f"audio.wav", 'w') as f:
+            with wave.open(f"temp/audio.wav", 'w') as f:
                 f.setparams((1, 2, 16000, 512, "NONE", "NONE"))
                 f.writeframes(struct.pack("h" * len(data), *data))
