@@ -7,6 +7,9 @@ import struct
 import json
 
 
+from app.models.transcribe_model import *
+
+
 speech_to_text_router = APIRouter()
 
 
@@ -21,3 +24,4 @@ async def create_room(websocket : WebSocket, user_id : int):
             with wave.open(f"temp/audio.wav", 'w') as f:
                 f.setparams((1, 2, 16000, 512, "NONE", "NONE"))
                 f.writeframes(struct.pack("h" * len(data), *data))
+            print("transcribing...")
